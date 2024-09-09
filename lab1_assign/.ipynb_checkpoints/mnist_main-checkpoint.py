@@ -46,8 +46,8 @@ transform = transforms.Compose([
 ])
 
 # Initialize the custom dataset using the CSV file path
-csv_file_path = './datasets/mnist_train.csv'
-csv_file_path2 = './datasets/mnist_test.csv'
+csv_file_path = '../datasets/lab1_dataset/mnist_train.csv'
+csv_file_path2 = '../datasets/lab1_dataset/mnist_test.csv'
 mnist_dataset = CustomMNISTDataset(csv_file_path, transform=transform)
 val_mnist_dataset = CustomMNISTDataset(csv_file_path2, transform=transform)
 
