@@ -1,2 +1,4 @@
 lab1_assign/datasets/
 
+lab1_assign/datasets/mnist_train.csv
+lab1_assign/datasets/mnist_test.csv
