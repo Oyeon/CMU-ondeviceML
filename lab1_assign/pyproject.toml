@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "lab1-assign"
+version = "0.1.0"
+description = "lab1 assignment"
+authors = ["Oyeon <data0311@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+git-filter-repo = "^2.45.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
