@@ -8,5 +8,6 @@ CONFIG = {
     'test_batch_size': 10,
     'learning_rate': 0.001,
     'epochs': 2,
-    'device': 'gpu' #'cpu'
+    'device': 'gpu', #'cpu'
+    'transform_type': 'resize_20' #'resize_14', 'resize_20', 'crop_20', 'no_transform'
 }

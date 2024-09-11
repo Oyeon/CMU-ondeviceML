@@ -1,2 +1,25 @@
-
 datasets/
+
+# Ignore results directory
+lab1_assign/results/
+
+# Ignore runs directory
+lab1_assign/runs/
+
+# Ignore __pycache__ directories
+**/__pycache__/
+
+# Ignore virtual environment directories
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+.Python
+env/
+venv/
+ENV/
+VENV/
+env.bak/
+venv.bak/
+

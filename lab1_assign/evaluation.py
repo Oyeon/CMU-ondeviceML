@@ -21,28 +21,28 @@ def evaluate_model(model, dataloader, loss_fn, device):
     accuracy = running_corrects / total_samples
     return avg_loss, accuracy
 
-def plot_metrics(training_losses, validation_losses, training_accuracies, validation_accuracies):
-    epochs = range(1, len(training_losses) + 1)
+# def plot_metrics(training_losses, validation_losses, training_accuracies, validation_accuracies):
+#     epochs = range(1, len(training_losses) + 1)
 
-    plt.figure(figsize=(12, 5))
+#     plt.figure(figsize=(12, 5))
 
-    # Plot training and validation loss
-    plt.subplot(1, 2, 1)
-    plt.plot(epochs, training_losses, 'r', label='Training loss')
-    plt.plot(epochs, validation_losses, 'b', label='Validation loss')
-    plt.title('Training and Validation Loss')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss')
-    plt.legend()
+#     # Plot training and validation loss
+#     plt.subplot(1, 2, 1)
+#     plt.plot(epochs, training_losses, 'r', label='Training loss')
+#     plt.plot(epochs, validation_losses, 'b', label='Validation loss')
+#     plt.title('Training and Validation Loss')
+#     plt.xlabel('Epochs')
+#     plt.ylabel('Loss')
+#     plt.legend()
 
-    # Plot training and validation accuracy
-    plt.subplot(1, 2, 2)
-    plt.plot(epochs, training_accuracies, 'r', label='Training accuracy')
-    plt.plot(epochs, validation_accuracies, 'b', label='Validation accuracy')
-    plt.title('Training and Validation Accuracy')
-    plt.xlabel('Epochs')
-    plt.ylabel('Accuracy')
-    plt.legend()
+#     # Plot training and validation accuracy
+#     plt.subplot(1, 2, 2)
+#     plt.plot(epochs, training_accuracies, 'r', label='Training accuracy')
+#     plt.plot(epochs, validation_accuracies, 'b', label='Validation accuracy')
+#     plt.title('Training and Validation Accuracy')
+#     plt.xlabel('Epochs')
+#     plt.ylabel('Accuracy')
+#     plt.legend()
 
-    plt.tight_layout()
-    plt.show()
+#     plt.tight_layout()
+#     plt.show()
