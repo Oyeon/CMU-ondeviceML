@@ -3,6 +3,7 @@ datasets/
 # Ignore results directory
 lab1_assign/results/
 
+lab1_assign/model_checkpoints/
 # Ignore runs directory
 lab1_assign/runs/
 
