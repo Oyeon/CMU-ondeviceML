@@ -5,6 +5,8 @@ from train import train_model
 import torch
 import matplotlib.pyplot as plt
 import os
+import json
+import csv
 
 def main():
     transform_types = ['crop_20', 'resize_20','no_transform', 'resize_14']
@@ -20,33 +22,66 @@ def main():
             config_name = f"{transform_type}_depth{model_config['num_hidden_layers']}_width{model_config['hidden_layer_width'] or 'default'}"
             print(f"Running experiment with config: {config_name}")
             CONFIG['transform_type'] = transform_type
-            train_loader, val_loader = get_dataloaders(CONFIG, transform_type=CONFIG['transform_type'])
+            train_loader, val_loader, test_loader = get_dataloaders(CONFIG, transform_type=CONFIG['transform_type'])
             model = GarmentClassifier(CONFIG['input_dims'], CONFIG['hidden_feature_dims'], CONFIG['output_classes'], **model_config)
             loss_fn = torch.nn.CrossEntropyLoss()
             optimizer = torch.optim.Adam(model.parameters(), lr=CONFIG['learning_rate'])
             
-            training_losses, validation_losses, training_accuracies, validation_accuracies, training_times, inference_times = train_model(CONFIG, model_config, model, train_loader, val_loader, loss_fn, optimizer)
+            # training_losses, validation_losses, training_accuracies, validation_accuracies, training_times, inference_times, inference_times_all, batch_latency_list, batch_flops_list = train_model(CONFIG, model_config, model, train_loader, val_loader, loss_fn, optimizer)
+            epoch_results = train_model(CONFIG, model_config, model, train_loader, val_loader, test_loader, loss_fn, optimizer)
             
             total_params = count_parameters(model)
             flops = compute_flops(model)
             
-            results[config_name] = {
-                'training_losses': training_losses,
-                'validation_losses': validation_losses,
-                'training_accuracies': training_accuracies,
-                'validation_accuracies': validation_accuracies,
-                'training_times': training_times,
-                'inference_times': inference_times,
-                'total_params': total_params,
-                'flops': flops,
-                'model_config': model_config  # Add model_config to results
-            }
-            
-            total_train_latency = sum(training_times)
-            total_inference_latency = sum(inference_times)
-            print(f'Depth: {model_config["num_hidden_layers"]}, FLOPs: {flops}, Params: {total_params}, Train Acc: {training_accuracies[-1]}, Val Acc: {validation_accuracies[-1]}, Train Latency: {total_train_latency / CONFIG["epochs"]}, Inference Latency: {total_inference_latency / len(val_loader)}')
+            results[config_name] = {'epoch_results': epoch_results}
 
-        visualize_results(results)
+
+    # Save results to a JSON file
+    with open('results/results.json', 'w') as f:
+        json.dump(results, f, indent=4)
+
+    flatten_and_save_to_csv(results, 'results/results.csv')
+
+
+            # results[config_name] = {
+            #     'training_losses': training_losses,
+            #     'validation_losses': validation_losses,
+            #     'training_accuracies': training_accuracies,
+            #     'validation_accuracies': validation_accuracies,
+            #     'training_times': training_times,
+            #     'inference_times': inference_times,
+            #     'inference_times_all': inference_times_all,
+            #     'total_params': total_params,
+            #     'flops': flops,
+            #     'model_config': model_config  # Add model_config to results
+            # }
+            
+            # total_train_latency = sum(training_times)
+            # total_inference_latency = sum(inference_times)
+            # print(f'Depth: {model_config["num_hidden_layers"]}, FLOPs: {flops}, Params: {total_params}, Train Acc: {training_accuracies[-1]}, Val Acc: {validation_accuracies[-1]}, Train Latency: {total_train_latency / CONFIG["epochs"]}, Inference Latency: {total_inference_latency / len(val_loader)}')
+
+        # visualize_results(results)
+
+
+def flatten_and_save_to_csv(results, csv_file_path):
+    # Flatten the results
+    flattened_results = []
+    for config_name, data in results.items():
+        epoch_results = data['epoch_results']
+        for epoch, metrics in epoch_results.items():
+            flat_result = {'config_name': config_name, 'epoch': epoch}
+            flat_result.update(metrics)
+            flattened_results.append(flat_result)
+
+    # Get the headers from the first flattened result
+    headers = flattened_results[0].keys()
+
+    # Write to CSV
+    with open(csv_file_path, 'w', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=headers)
+        writer.writeheader()
+        for row in flattened_results:
+            writer.writerow(row)
 
 def visualize_results(results):
     for key, metrics in results.items():

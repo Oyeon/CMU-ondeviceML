@@ -1,9 +1,20 @@
 import pandas as pd
 import numpy as np
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 from PIL import Image
 import torch
+import random
+
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 class CustomMNISTDataset(Dataset):
     def __init__(self, csv_file, transform=None):
@@ -52,11 +63,20 @@ def create_transform(transform_type):
             transforms.Normalize((0.5,), (0.5,))
         ]), 28 * 28
 
-def get_dataloaders(config, transform_type='no_transform'):
+def get_dataloaders(config, transform_type='no_transform', seed=42):
+    set_seed(seed)  # Set the seed for reproducibility
     transform, input_dims = create_transform(transform_type)
     config['input_dims'] = input_dims
     train_dataset = CustomMNISTDataset(config['dataset_train_path'], transform=transform)
-    val_dataset = CustomMNISTDataset(config['dataset_test_path'], transform=transform)
+    test_dataset = CustomMNISTDataset(config['dataset_test_path'], transform=transform)
+    
+    # Split train_dataset into training and validation sets (80/20 split)
+    train_size = int(0.8 * len(train_dataset))
+    val_size = len(train_dataset) - train_size
+    train_dataset, val_dataset = random_split(train_dataset, [train_size, val_size])
+    
     train_loader = DataLoader(train_dataset, batch_size=config['train_batch_size'], shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=config['test_batch_size'], shuffle=False)
-    return train_loader, val_loader
+    test_loader = DataLoader(test_dataset, batch_size=config['test_batch_size'], shuffle=False)
+    
+    return train_loader, val_loader, test_loader

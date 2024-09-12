@@ -5,7 +5,7 @@ CONFIG = {
     'hidden_feature_dims': 1024,
     'output_classes': 10,
     'train_batch_size': 64,
-    'test_batch_size': 10,
+    'test_batch_size': 1,
     'learning_rate': 0.001,
     'epochs': 2,
     'device': 'gpu', #'cpu'

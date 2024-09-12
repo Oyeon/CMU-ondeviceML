@@ -1,7 +1,7 @@
 import torch
 import time
 
-def train_one_epoch(epoch_index, model, train_loader, optimizer, loss_fn, tb_writer):
+def train_one_epoch(epoch_index, model, train_loader, val_loader, optimizer, loss_fn, tb_writer):
     model.train()
     running_loss = 0.0
     running_corrects = 0
@@ -31,7 +31,28 @@ def train_one_epoch(epoch_index, model, train_loader, optimizer, loss_fn, tb_wri
     avg_loss = running_loss / len(train_loader)
     accuracy = running_corrects / total_samples
     epoch_time = time.time() - start_time  # End time for training latency
-    return avg_loss, accuracy, epoch_time
+
+    # Validation process
+    model.eval()
+    running_vloss = 0.0
+    running_vcorrects = 0
+    total_vsamples = 0
+    with torch.no_grad():
+        for vinputs, vlabels in val_loader:
+            voutputs = model(vinputs)
+            vloss = loss_fn(voutputs, vlabels)
+            running_vloss += vloss.item()
+            _, vpreds = torch.max(voutputs, 1)
+            running_vcorrects += torch.sum(vpreds == vlabels).item()
+            total_vsamples += vlabels.size(0)
+    avg_vloss = running_vloss / len(val_loader)
+    validation_accuracy = running_vcorrects / total_vsamples
+
+    # Log validation loss and accuracy
+    tb_writer.add_scalar('Loss/validation', avg_vloss, epoch_index + 1)
+    tb_writer.add_scalar('Accuracy/validation', validation_accuracy, epoch_index + 1)
+
+    return avg_loss, accuracy, epoch_time, avg_vloss, validation_accuracy
 
 def validate(model, val_loader, loss_fn):
     model.eval()
@@ -52,8 +73,9 @@ def validate(model, val_loader, loss_fn):
             total_vsamples += vlabels.size(0)
     avg_vloss = running_vloss / len(val_loader)
     validation_accuracy = running_vcorrects / total_vsamples
-    avg_inference_time = sum(inference_times[1:]) / (len(inference_times) - 1)  # Exclude the first measurement
-    return avg_vloss, validation_accuracy, avg_inference_time
+    # avg_inference_time = sum(inference_times[1:]) / (len(inference_times) - 1)  # Exclude the first measurement
+    # avg_inference_time_all = sum(inference_times[1:]) / (len(inference_times))  # Exclude the first measurement
+    return avg_vloss, validation_accuracy, inference_times
 
 
 # import torch
