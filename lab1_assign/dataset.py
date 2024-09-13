@@ -50,6 +50,12 @@ def create_transform(transform_type):
             transforms.Resize((20, 20)),
             transforms.Normalize((0.5,), (0.5,))
         ]), 20 * 20
+    elif transform_type == 'resize_7':
+        return transforms.Compose([
+            transforms.Lambda(lambda img: torch.tensor(img).unsqueeze(0)),  # Convert NumPy array to tensor
+            transforms.Resize((7, 7)),
+            transforms.Normalize((0.5,), (0.5,))
+        ]), 7 * 7
     elif transform_type == 'crop_20':
         return transforms.Compose([
             transforms.Lambda(lambda img: torch.tensor(img).unsqueeze(0)),  # Convert NumPy array to tensor
@@ -57,6 +63,20 @@ def create_transform(transform_type):
             transforms.CenterCrop(20),
             transforms.Normalize((0.5,), (0.5,))
         ]), 20 * 20
+    elif transform_type == 'crop_14':
+        return transforms.Compose([
+            transforms.Lambda(lambda img: torch.tensor(img).unsqueeze(0)),  # Convert NumPy array to tensor
+            transforms.Resize((28, 28)),
+            transforms.CenterCrop(14),
+            transforms.Normalize((0.5,), (0.5,))
+        ]), 14 * 14  # Corrected this line
+    elif transform_type == 'crop_7':
+        return transforms.Compose([
+            transforms.Lambda(lambda img: torch.tensor(img).unsqueeze(0)),  # Convert NumPy array to tensor
+            transforms.Resize((28, 28)),
+            transforms.CenterCrop(7),
+            transforms.Normalize((0.5,), (0.5,))
+        ]), 7 * 7
     else:  # no_transform
         return transforms.Compose([
             transforms.Lambda(lambda img: torch.tensor(img).unsqueeze(0)),  # Convert NumPy array to tensor

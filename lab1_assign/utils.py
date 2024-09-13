@@ -56,12 +56,14 @@ def train_one_epoch(epoch_index, model, train_loader, val_loader, optimizer, los
 
 def validate(model, val_loader, loss_fn):
     model.eval()
+    # model.to('cpu')  # Ensure the model is on the CPU
     running_vloss = 0.0
     running_vcorrects = 0
     total_vsamples = 0
     inference_times = []  # List to store inference times
     with torch.no_grad():
         for vinputs, vlabels in val_loader:
+            # vinputs, vlabels = vinputs.to('cpu'), vlabels.to('cpu')  # Ensure data is on the CPU
             start_time = time.time()  # Start time for inference latency
             voutputs = model(vinputs)
             inference_time = time.time() - start_time  # End time for inference latency

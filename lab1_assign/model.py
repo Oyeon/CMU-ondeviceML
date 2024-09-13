@@ -18,14 +18,35 @@ class GarmentClassifier(nn.Module):
             self.hidden_layers.append(nn.Linear(hidden_layer_width, hidden_layer_width))
         
         self.output_layer = nn.Linear(hidden_layer_width, output_size)
+        # self.dropout = nn.Dropout(CONFIG['dropout_prob'])
+        # self._initialize_weights(CONFIG['init_method'])
+
         
     def forward(self, x):
         x = x.view(x.size(0), -1)  # Flatten the input tensor dynamically
         x = F.relu(self.input_layer(x))
+        # x = self.dropout(x)  # Apply dropout after the input layer
         for layer in self.hidden_layers:
             x = F.relu(layer(x))
+            # x = self.dropout(x)  # Apply dropout after each hidden layer
         x = self.output_layer(x)
         return x        
+
+    
+    # def _initialize_weights(self, method):
+    #     for m in self.modules():
+    #         if isinstance(m, nn.Linear):
+    #             if method == 'he':
+    #                 nn.init.kaiming_normal_(m.weight, nonlinearity='relu')
+    #             elif method == 'xavier':
+    #                 nn.init.xavier_normal_(m.weight)
+    #             elif method == 'random':
+    #                 nn.init.uniform_(m.weight, 0, 1)
+    #             elif method == 'zero_one':
+    #                 nn.init.constant_(m.weight, 0.5)
+    #             if m.bias is not None:
+    #                 nn.init.constant_(m.bias, 0)
+
 
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)

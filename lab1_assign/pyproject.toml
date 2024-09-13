@@ -14,6 +14,7 @@ torchvision = "^0.19.1"
 matplotlib = "^3.9.2"
 tensorboard = "^2.17.1"
 thop = "^0.1.1.post2209072238"
+scikit-learn = "^1.5.2"
 
 
 [build-system]
