@@ -10,12 +10,12 @@ import csv
 
 def main():
     # transform_types = ['no_transform', 'crop_20', 'crop_14', 'crop_7', 'resize_20', 'resize_14', 'resize_7']
-    transform_types = ['no_transform']
+    transform_types = ['crop_7', 'resize_7']
     model_configs = [
-        # {'num_hidden_layers': 2, 'hidden_layer_width': 128},  # Default
+        {'num_hidden_layers': 2, 'hidden_layer_width': 128},  # Default
         # {'num_hidden_layers': 2, 'hidden_layer_width': 256},  # Default
         # {'num_hidden_layers': 2, 'hidden_layer_width': 512},  # Default
-        {'num_hidden_layers': 2, 'hidden_layer_width': 1024},  # Default
+        # {'num_hidden_layers': 2, 'hidden_layer_width': 1024},  # Default
         # {'num_hidden_layers': 2, 'hidden_layer_width': 2048},  # Default
         # {'num_hidden_layers': 2, 'hidden_layer_width': 4096},  # Default
         # {'num_hidden_layers': 3, 'hidden_layer_width': None},  # Increased depth
@@ -48,7 +48,7 @@ def main():
     # with open('results/results.json', 'w') as f:
     #     json.dump(results, f, indent=4)
 
-    flatten_and_save_to_csv(results, 'results/cpu_results.csv')
+    flatten_and_save_to_csv(results, 'results/7by7and128_results.csv')
 
 
 
