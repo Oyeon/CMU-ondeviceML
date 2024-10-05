@@ -32,21 +32,6 @@ class GarmentClassifier(nn.Module):
         x = self.output_layer(x)
         return x        
 
-    
-    # def _initialize_weights(self, method):
-    #     for m in self.modules():
-    #         if isinstance(m, nn.Linear):
-    #             if method == 'he':
-    #                 nn.init.kaiming_normal_(m.weight, nonlinearity='relu')
-    #             elif method == 'xavier':
-    #                 nn.init.xavier_normal_(m.weight)
-    #             elif method == 'random':
-    #                 nn.init.uniform_(m.weight, 0, 1)
-    #             elif method == 'zero_one':
-    #                 nn.init.constant_(m.weight, 0.5)
-    #             if m.bias is not None:
-    #                 nn.init.constant_(m.bias, 0)
-
 
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -56,19 +41,3 @@ def compute_flops(model):
     flops, _ = profile(model, inputs=(input_tensor,), verbose=False)
     return flops
 
-
-# class GarmentClassifier(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size):
-#         super(GarmentClassifier, self).__init__()
-#         self.input_layer = nn.Linear(input_size, hidden_size)
-#         self.fc1 = nn.Linear(hidden_size, hidden_size)
-#         self.fc2 = nn.Linear(hidden_size, hidden_size)
-#         self.output_layer = nn.Linear(hidden_size, output_size)
-        
-#     def forward(self, x):
-#         x = x.view(-1, self.input_layer.in_features)  # Use dynamic input dimensions
-#         x = F.relu(self.input_layer(x))
-#         x = F.relu(self.fc1(x))
-#         x = F.relu(self.fc2(x))
-#         x = self.output_layer(x)
-#         return x

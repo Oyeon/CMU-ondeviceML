@@ -54,7 +54,25 @@ def train_model(config, model_config, model, train_loader, val_loader, test_load
             best_vloss = avg_vloss
             model_path = f'model_checkpoints/model_{timestamp}_epoch_{epoch + 1}.pth'
             torch.save(model.state_dict(), model_path)
-            # print(f"Model saved at {model_path} with Test loss {avg_tloss:.4f}")
+            print(f"Model saved at {model_path} with Test loss {avg_tloss:.4f}")
+
+            dummy_input = torch.randn(1, config['input_dims'])
+            onnx_model_path = f'model_checkpoints/model_{timestamp}_epoch_{epoch + 1}.onnx'
+
+            model.eval()  # Set to evaluation mode before exporting
+            torch.onnx.export(
+                model,
+                dummy_input,
+                onnx_model_path,
+                export_params=True,
+                opset_version=11,
+                do_constant_folding=True,
+                input_names=['input'],
+                output_names=['output'],
+                dynamic_axes={'input': {0: 'batch_size'}, 'output': {0: 'batch_size'}}
+            )
+            print(f"ONNX model exported at {onnx_model_path}")
+
 
         # Store metrics for plotting
         total_train_latency = sum(training_times)
