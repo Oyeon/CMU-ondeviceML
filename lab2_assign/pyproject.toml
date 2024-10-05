@@ -17,6 +17,7 @@ thop = "^0.1.1.post2209072238"
 scikit-learn = "^1.5.2"
 onnx = "^1.17.0"
 onnxruntime = "^1.19.2"
+docker = "^7.1.0"
 
 
 [build-system]
