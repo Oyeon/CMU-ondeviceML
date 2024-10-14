@@ -1,0 +1,12 @@
+names:
+- Pedestrian
+- Cyclist
+- Car
+- Van
+- Truck
+- Tram
+- Person_sitting
+- DontCare
+nc: 8
+val: ./val/images
+train: ./train/images
