@@ -10,7 +10,9 @@ lab1_assign/runs/
 lab2_assign/model_checkpoints/
 lab2_assign/results/
 lab2_assign/runs/
-
+lab3_assign/3.3/runs/
+lab3_assign/3.2/model_checkpoints/
+lab3_assign/3.2/runs/
 # Ignore __pycache__ directories
 **/__pycache__/
 

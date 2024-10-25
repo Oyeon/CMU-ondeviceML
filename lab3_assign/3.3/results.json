@@ -1,0 +1,19 @@
+{
+    "YOLOv8": {
+        "metrics": {
+            "precision": 0.630942084353701,
+            "recall": 0.45509861640032223,
+            "mAP50": 0.4892639980139189,
+            "mAP50-95": 0.2840298915487574
+        },
+        "accuracy_percentage": 48.92639980139189,
+        "precision_percentage": 63.094208435370106,
+        "model_size_MB": 46.732311,
+        "quantized_model_size_MB": 23.714337,
+        "inference_latency_original_ms": 27.1159029006958,
+        "inference_latency_quantized_ms": 90.86397886276245,
+        "quantized_model_path": "/home/fluentt/test-k/24f/odml/lab3_assign/3.3/runs/detect/medium-baseline/quantized_model_static.onnx",
+        "timestamp": "20241022_175111",
+        "quantization_type": "Static"
+    }
+}
