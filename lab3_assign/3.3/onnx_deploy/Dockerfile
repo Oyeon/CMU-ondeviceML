@@ -48,3 +48,24 @@ COPY datasets /workspace/datasets
 
 # Set command to run inference script
 CMD ["python3", "inference_code.py"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
