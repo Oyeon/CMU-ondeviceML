@@ -1,0 +1,13 @@
+names:
+- Pedestrian
+- Cyclist
+- Car
+- Van
+- Truck
+- Tram
+- Person_sitting
+- DontCare
+nc: 8
+train: ./datasets/training/images
+val: ./datasets/val/images
+
