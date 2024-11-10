@@ -1,5 +1,30 @@
 datasets/
 
+# Model checkpoint files
+lab4_assign/part1/*.pt
+
+# JSON files
+lab4_assign/part1/*.json
+
+# Python cache files
+lab4_assign/part1/__pycache__/
+lab4_assign/part1/*.py[cod]
+lab4_assign/part1/*$py.class
+
+# Logs and temporary files
+lab4_assign/part1/runs/
+lab4_assign/part1/*.log
+
+# Virtual environment
+lab4_assign/part1/venv/
+lab4_assign/part1/env/
+lab4_assign/part1/.env/
+
+# IDE settings
+lab4_assign/part1/.vscode/
+lab4_assign/part1/.idea/
+
+lab4_assign/part2/
 # Ignore results directory
 lab1_assign/results/
 
