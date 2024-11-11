@@ -16,8 +16,15 @@ CONFIG = {
     'quantization': 'none', #'dynamic', 'static', 'qat','none'
     'qat_epochs': 2, 
     'model_save': False, 
-    'pruning_amount': 0.3,
-    # 'activation_function': 'relu', #'relu', 'tanh', 'gelu'
+
+    'non_iterative': False,  # Set to True for non-iterative pruning
+    'pruning_amount': 0.33,
+
+    'iterative_mode': True,  # Set to True for iterative pruning
+    'sparsity_threshold': 0.1,
+    'num_iterations': 10,  # For iterative pruning
+    'pruning_amount_per_iteration': 0.33,  # For iterative pruning    # 'activation_function': 'relu', #'relu', 'tanh', 'gelu'
+
     # 'dropout_prob': 0.8, #(0.5, 0.8, 1)
     # 'weight_init': 'torch_default', # 'torch_default', 'he', 'xavier', 'random', 'zero_one'
     # 'weight_decay': 0.0, # 0.0, 0.01, 0.001
