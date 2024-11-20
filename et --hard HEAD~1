@@ -1,0 +1,36 @@
+[33mb7cfeca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m Add .gitignore file
+[33m024bf14[m add env
+[33mfc89a84[m Merge pull request #2 from Oyeon/dev
+[33mf26ac84[m delate files
+[33m0e4a8ff[m feat:add onnx deploy
+[33mefd58e0[m Merge pull request #1 from Oyeon/dev
+[33ma5b937b[m feat: add 1st draft
+[33m47e4c52[m feat:exercise 1 & 2
+[33mb199d61[m feat: lab2 update version
+[33m8bca221[m feat: add yolov8m onnx and inference code
+[33m913c0f0[m feat: 2nd infer code
+[33m3e3fd71[m feat: add simple readme.md
+[33m030e2c2[m feat: add docker image for jetson 2gb deployment: ocker push data0311/owen-odml-lab2-v01:1.0.0
+[33mb11bfb0[m feat: Add ONNX model export and inference latency measurement
+[33m87b1624[m Added onnx model for Jetson
+[33m4276787[m Jon's lab1 upload
+[33maf950b8[m[33m ([m[1;32mmaster[m[33m)[m add lab2 init folder
+[33m13a33f6[m add jupyter
+[33mf5e4771[m FEAT: final report
+[33m2bafba6[m final
+[33m59be2d1[m 1st visual update
+[33m7172408[m final-update
+[33m562df17[m Delete cache
+[33m6dbd19a[m FEAT:1st draft version
+[33m8c081d2[m FEAT: add 1st full training stage
+[33m96f5204[m FEAT: jupyter test
+[33m5b498b5[m ADD gitignore
+[33md9ecb29[m FEAT: revert
+[33m7c6a52e[m Add datasets to .gitignore
+[33m2d94ca0[m Add datasets to .gitignore and remove from tracking
+[33m866dd1d[m Remove large dataset file and update .gitignore
+[33mbe0ea1a[m clone second
+[33m989d70e[m clone
+[33m0d0fa3b[m Fix: add lab1_assign as a regular directory
+[33m813f68e[m Updated lab1_assign with new changes
+[33m4a0b3c8[m first commit

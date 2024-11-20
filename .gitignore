@@ -1,3 +1,56 @@
+# Lab4 Part2 내부 디렉토리
+lab4_assign/part2/datasets/
+lab4_assign/part2/datasets/training/
+lab4_assign/part2/datasets/val/
+lab4_assign/part2/tensorrt_deploy/
+lab4_assign/part2/tensorrt_deploy/datasets/
+lab4_assign/part2/onnx_deploy/
+lab4_assign/part2/onnx_deploy/datasets/
+lab4_assign/part2/not_use/
+lab4_assign/part2/__pycache__/
+lab4_assign/part2/runs/
+lab4_assign/part2/runs/evaluate/
+lab4_assign/part2/runs/detect/
+lab4_assign/part2/model_checkpoints/
+lab4_assign/part2/check/
+
+# Lab3 3.3 내부 디렉토리
+lab3_assign/3.3/datasets/
+lab3_assign/3.3/datasets/training/
+lab3_assign/3.3/datasets/val/
+lab3_assign/3.3/tensorrt_deploy/
+lab3_assign/3.3/tensorrt_deploy/datasets/
+lab3_assign/3.3/onnx_deploy/
+lab3_assign/3.3/onnx_deploy/datasets/
+lab3_assign/3.3/not_use/
+lab3_assign/3.3/__pycache__/
+lab3_assign/3.3/runs/
+lab3_assign/3.3/runs/evaluate/
+lab3_assign/3.3/runs/detect/
+lab3_assign/3.3/model_checkpoints/
+lab3_assign/3.3/check/
+
+# Datasets
+datasets/lab1_dataset/
+
+# Common cache and temporary files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.Python
+**/*.pt
+**/*.pth
+**/*.onnx
+**/*.engine
+**/*.plan
+**/*.json
+**/*.log
+
+*.zip
+lab3_assign/3.3/tensorrt_deploy.zip
+lab3_assign/3.3/onnx_deploy.zip
+
 datasets/
 
 # Ignore results directory
